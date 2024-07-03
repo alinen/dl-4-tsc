@@ -1,36 +1,13 @@
 # Deep Learning for Time Series Classification
-This is the companion repository for [our paper](https://link.springer.com/article/10.1007%2Fs10618-019-00619-1) titled "Deep learning for time series classification: a review" published in [Data Mining and Knowledge Discovery](https://link.springer.com/journal/10618), also available on [ArXiv](https://arxiv.org/pdf/1809.04356.pdf). 
+
+This is the companion repository for [this paper](https://link.springer.com/article/10.1007%2Fs10618-019-00619-1) titled "Deep learning for time series classification: a review" published in [Data Mining and Knowledge Discovery](https://link.springer.com/journal/10618), also available on [ArXiv](https://arxiv.org/pdf/1809.04356.pdf). 
+
+This repository updates the code and documentation for the latest versions of tensorflow, numpy, keras, etc. 
+The original repository is [here](https://github.com/hfawaz/dl-4-tsc).
 
 ![architecture resnet](https://github.com/hfawaz/dl-4-tsc/blob/master/png/resnet-archi.png)
 
-## Docker
-Assuming you have [docker](https://hub.docker.com) installed.
-You can now use the docker image provided [here](https://hub.docker.com/repository/docker/hassanfawaz/dl-4-tsc/general). 
-
-Access the docker container via: 
-```bash
-docker run --name somename --gpus all  -idt hassanfawaz/dl-4-tsc:0.3
-docker exec -it somename bash
-```
-
-To run you will need to manually download the UCR archive into `/dl-4-tsc/archives/`: 
-
-```bash
-cd /dl-4-tsc/archives
-wget https://www.cs.ucr.edu/~eamonn/time_series_data_2018/UCRArchive_2018.zip
-unzip -P $password UCRArchive_2018.zip
-```
-
-The password can be found [here](https://www.cs.ucr.edu/~eamonn/time_series_data_2018/).
-
-Now that you have the data and the code you can just run the code.
-
-```bash
-cd /dl-4-tsc
-python -m main UCRArchive_2018 Coffee fcn _itr_0
-```
-
-You can also try and install with pip on your env.
+The results in the paper were generated using the Tensorflow 1.14 implementation which can be found [here](https://github.com/hfawaz/dl-4-tsc/commit/7ab94a02aedf3a9688e248603bd43c5d405f039b). 
 
 ## Data 
 The data used in this project comes from two sources: 
@@ -38,23 +15,16 @@ The data used in this project comes from two sources:
 * The [MTS archive](http://www.mustafabaydogan.com/files/viewcategory/20-data-sets.html), which contains the 13 multivariate time series datasets.
 
 ## Code 
+
 The code is divided as follows: 
 * The [main.py](https://github.com/hfawaz/dl-4-tsc/blob/master/main.py) python file contains the necessary code to run an experiement. 
 * The [utils](https://github.com/hfawaz/dl-4-tsc/tree/master/utils) folder contains the necessary functions to read the datasets and visualize the plots.
 * The [classifiers](https://github.com/hfawaz/dl-4-tsc/tree/master/classifiers) folder contains nine python files one for each deep neural network tested in our paper. 
 
-To run a model on one dataset you should issue the following command: 
-```
-python3 main.py TSC Coffee fcn _itr_8
-```
-which means we are launching the [fcn](https://github.com/hfawaz/dl-4-tsc/blob/master/classifiers/fcn.py) model on the univariate UCR archive for the Coffee dataset (see [constants.py](https://github.com/hfawaz/dl-4-tsc/blob/master/utils/constants.py) for a list of possible options).
 
 ## Prerequisites
-All python packages needed are listed in [pip-requirements.txt](https://github.com/hfawaz/dl-4-tsc/blob/master/utils/pip-requirements.txt) file and can be installed simply using the pip command. 
-The code now uses Tensorflow 2.0.
-The results in the paper were generated using the Tensorflow 1.14 implementation which can be found [here](https://github.com/hfawaz/dl-4-tsc/commit/7ab94a02aedf3a9688e248603bd43c5d405f039b). 
-Using Tensorflow 2.0 should give the same results.  
-Now [InceptionTime](https://github.com/hfawaz/InceptionTime) is included in the mix, feel free to send a pull request to add another classifier. 
+
+The code has been testing for Tensorflow 2.16.2, numpy 1.26.4 and keras 3.4.1.
 
 * [numpy](http://www.numpy.org/)  
 * [pandas](https://pandas.pydata.org/)  
@@ -66,8 +36,60 @@ Now [InceptionTime](https://github.com/hfawaz/InceptionTime) is included in the 
 * [h5py](http://docs.h5py.org/en/latest/build.html)
 * [keras_contrib](https://www.github.com/keras-team/keras-contrib.git)
 
+Tensorflow requires an NVIDIA GPU to run. You can verify that your pre-requisites are setup correctly by running the `hello_tensorflow.py`.
+
+```
+python3 hello_tensorflow.py
+```
+
+If everything is setup correctly, you should see the model training, following by the accuracy and loss. 
+
+```
+Epoch 1/5
+1875/1875 ━━━━━━━━━━━━━━━━━━━━ 3s 1ms/step - accuracy: 0.8591 - loss: 0.4807
+Epoch 2/5
+1875/1875 ━━━━━━━━━━━━━━━━━━━━ 2s 1ms/step - accuracy: 0.9542 - loss: 0.1525
+Epoch 3/5
+1875/1875 ━━━━━━━━━━━━━━━━━━━━ 2s 1ms/step - accuracy: 0.9669 - loss: 0.1097
+Epoch 4/5
+1875/1875 ━━━━━━━━━━━━━━━━━━━━ 2s 1ms/step - accuracy: 0.9738 - loss: 0.0839
+Epoch 5/5
+1875/1875 ━━━━━━━━━━━━━━━━━━━━ 2s 1ms/step - accuracy: 0.9768 - loss: 0.0724
+313/313 - 0s - 842us/step - accuracy: 0.9793 - loss: 0.0677
+```
+
+## Getting Started
+
+To install data for testing
+
+```
+cd /dl-4-tsc/archives
+wget https://www.cs.ucr.edu/~eamonn/time_series_data_2018/UCRArchive_2018.zip
+unzip -P $password UCRArchive_2018.zip
+```
+
+The password can be found [here](https://www.cs.ucr.edu/~eamonn/time_series_data_2018/).
+
+Before running, edit `main.py` to point to the root of this repository on your local machine. The default 
+is to use relative paths and run from the top level directory of the respoitory. Otherwise, change the 
+path on line 83 of `main.py`
+
+```
+# change this directory for your machine
+root_dir = './'
+```
+
+To run a model on one dataset you should issue the following command: 
+```
+python3 main.py UCRArchive_2018 Coffee fcn _itr_8
+```
+
+which means we are launching the [fcn](https://github.com/hfawaz/dl-4-tsc/blob/master/classifiers/fcn.py) model on the univariate UCR archive for the Coffee dataset (see [constants.py](https://github.com/hfawaz/dl-4-tsc/blob/master/utils/constants.py) for a list of possible options).
+
 ## Results
+
 I added the [results](https://github.com/hfawaz/dl-4-tsc/blob/master/results/results-ucr-128.csv) on the 128 datasets from the [UCR archive 2018](https://www.cs.ucr.edu/~eamonn/time_series_data_2018/).
+
 Our [results](https://github.com/hfawaz/dl-4-tsc/tree/master/results) in the paper showed that a deep residual network architecture performs best for the time series classification task. 
 
 The following table contains the averaged accuracy over 10 runs of each implemented model on the UCR/UEA archive, with the standard deviation between parentheses. 
