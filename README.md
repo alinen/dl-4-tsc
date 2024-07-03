@@ -2,6 +2,7 @@
 
 This is the companion repository for [this paper](https://link.springer.com/article/10.1007%2Fs10618-019-00619-1) titled "Deep learning for time series classification: a review" published in [Data Mining and Knowledge Discovery](https://link.springer.com/journal/10618), also available on [ArXiv](https://arxiv.org/pdf/1809.04356.pdf). 
 
+This repository updates the code and documentation for the latest versions of tensorflow, numpy, keras, etc. 
 The original repository is [here](https://github.com/hfawaz/dl-4-tsc).
 
 ![architecture resnet](https://github.com/hfawaz/dl-4-tsc/blob/master/png/resnet-archi.png)
