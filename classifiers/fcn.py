@@ -18,7 +18,7 @@ class Classifier_FCN:
 			if(verbose==True):
 				self.model.summary()
 			self.verbose = verbose
-			self.model.save_weights(self.output_directory+'model_init.hdf5')
+			self.model.save_weights(self.output_directory+'model_init.weights.h5')
 		return
 
 	def build_model(self, input_shape, nb_classes):
@@ -48,7 +48,7 @@ class Classifier_FCN:
 		reduce_lr = keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=50, 
 			min_lr=0.0001)
 
-		file_path = self.output_directory+'best_model.hdf5'
+		file_path = self.output_directory+'best_model.keras'
 
 		model_checkpoint = keras.callbacks.ModelCheckpoint(filepath=file_path, monitor='loss', 
 			save_best_only=True)
@@ -74,9 +74,9 @@ class Classifier_FCN:
 		
 		duration = time.time() - start_time
 
-		self.model.save(self.output_directory+'last_model.hdf5')
+		self.model.save(self.output_directory+'last_model.keras')
 
-		model = keras.models.load_model(self.output_directory+'best_model.hdf5')
+		model = keras.models.load_model(self.output_directory+'best_model.keras')
 
 		y_pred = model.predict(x_val)
 
@@ -88,7 +88,7 @@ class Classifier_FCN:
 		keras.backend.clear_session()
 
 	def predict(self, x_test, y_true,x_train,y_train,y_test,return_df_metrics = True):
-		model_path = self.output_directory + 'best_model.hdf5'
+		model_path = self.output_directory + 'best_model.keras'
 		model = keras.models.load_model(model_path)
 		y_pred = model.predict(x_test)
 		if return_df_metrics:
