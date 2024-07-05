@@ -384,7 +384,7 @@ def save_logs(output_directory, hist, y_pred, y_true, duration, lr=True, y_true_
     df_best_model['best_model_train_acc'] = row_best_model['accuracy']
     df_best_model['best_model_val_acc'] = row_best_model['val_accuracy']
     if lr == True:
-        df_best_model['best_model_learning_rate'] = row_best_model['lr']
+        df_best_model['best_model_learning_rate'] = row_best_model['learning_rate']
     df_best_model['best_model_nb_epoch'] = index_best_model
 
     df_best_model.to_csv(output_directory + 'df_best_model.csv', index=False)
