@@ -11,8 +11,8 @@ The results in the paper were generated using the Tensorflow 1.14 implementation
 
 ## Data 
 The data used in this project comes from two sources: 
-* The [UCR/UEA archive](http://timeseriesclassification.com/TSC.zip), which contains the 85 univariate time series datasets. 
-* The [MTS archive](http://www.mustafabaydogan.com/files/viewcategory/20-data-sets.html), which contains the 13 multivariate time series datasets.
+* The [UCR/UEA archive](https://www.cs.ucr.edu/~eamonn/time_series_data_2018/), which contains the 85 univariate time series datasets. 
+* The [MTS archive](http://www.timeseriesclassification.com/index.php), which contains the 13 multivariate time series datasets.
 
 ## Code 
 
