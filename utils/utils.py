@@ -287,7 +287,6 @@ def calculate_metrics(y_true, y_pred, duration, y_true_val=None, y_pred_val=None
     res['duration'] = duration
     return res
 
-
 def save_test_duration(file_name, test_duration):
     res = pd.DataFrame(data=np.zeros((1, 1), dtype=float), index=[0],
                        columns=['test_duration'])
@@ -371,6 +370,10 @@ def save_logs(output_directory, hist, y_pred, y_true, duration, lr=True, y_true_
 
     df_metrics = calculate_metrics(y_true, y_pred, duration, y_true_val, y_pred_val)
     df_metrics.to_csv(output_directory + 'df_metrics.csv', index=False)
+
+    cmatrix = sklearn.metrics.confusion_matrix(y_true, y_pred)
+    confusion_matrix = pd.DataFrame(cmatrix) 
+    confusion_matrix.to_csv(output_directory + 'confusion_matrix.csv', index=False)
 
     index_best_model = hist_df['loss'].idxmin()
     row_best_model = hist_df.loc[index_best_model]
