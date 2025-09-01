@@ -94,6 +94,7 @@ class Classifier_FCN:
 		if return_df_metrics:
 			y_pred = np.argmax(y_pred, axis=1)
 			df_metrics = calculate_metrics(y_true, y_pred, 0.0)
+            cmatrix = sklearn.metrics.confusion_matrix(y_true, y_pred)
 			return df_metrics
 		else:
 			return y_pred
