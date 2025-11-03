@@ -5,11 +5,10 @@ import pandas as pd
 import sklearn.preprocessing
 import sklearn
 
-
-savename = "results/fcn/UCRArchive_2018120/120_RotAxes_PosGbl_Head/best_model.keras"
+savename = "results/fcn/UCRArchive_2018test/120_PosGbl_Head/best_model.keras"
 trained = tf.keras.models.load_model(savename)
 
-filename = "archives/UCRArchive_2018/120_RotAxes_PosGbl_Head/120_RotAxes_PosGbl_Head_TEST.tsv"
+filename = "archives/UCRArchive_2018/120_PosGbl_Head/120_PosGbl_Head_TEST.tsv"
 df_test = pd.read_csv(filename, sep='\t', header=None)
 
 y_true = df_test.values[:, 0]
@@ -24,6 +23,8 @@ test_data = (test_data - test_data.mean(axis=1, keepdims=True)) / std_
 
 y_pred = trained.predict(test_data)
 y_pred = np.argmax(y_pred, axis=1)
+y_pred_frame = pd.DataFrame(y_pred) 
+y_pred_frame.to_csv('predicted_labels.csv', index=False)
 
 cmatrix = sklearn.metrics.confusion_matrix(y_true, y_pred)
 print(cmatrix)
