@@ -2,6 +2,7 @@ from builtins import print
 import numpy as np
 import pandas as pd
 import matplotlib
+import sklearn
 
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
@@ -374,6 +375,9 @@ def save_logs(output_directory, hist, y_pred, y_true, duration, lr=True, y_true_
     cmatrix = sklearn.metrics.confusion_matrix(y_true, y_pred)
     confusion_matrix = pd.DataFrame(cmatrix) 
     confusion_matrix.to_csv(output_directory + 'confusion_matrix.csv', index=False)
+
+    y_pred_frame = pd.DataFrame(y_pred) 
+    y_pred_frame.to_csv(output_directory + 'predicted_labels.csv', index=False)
 
     index_best_model = hist_df['loss'].idxmin()
     row_best_model = hist_df.loc[index_best_model]

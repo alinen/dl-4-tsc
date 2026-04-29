@@ -5,6 +5,8 @@ import tensorflow.keras as keras
 import tensorflow as tf
 import numpy as np
 import time 
+import sklearn.preprocessing
+import sklearn
 
 from utils.utils import save_logs
 from utils.utils import calculate_metrics
@@ -63,7 +65,7 @@ class Classifier_FCN:
 			exit()
 		# x_val and y_val are only used to monitor the test loss and NOT for training  
 		batch_size = 16
-		nb_epochs = 100
+		nb_epochs = 1000
 
 		mini_batch_size = int(min(x_train.shape[0]/10, batch_size))
 
@@ -94,7 +96,7 @@ class Classifier_FCN:
 		if return_df_metrics:
 			y_pred = np.argmax(y_pred, axis=1)
 			df_metrics = calculate_metrics(y_true, y_pred, 0.0)
-            cmatrix = sklearn.metrics.confusion_matrix(y_true, y_pred)
+			cmatrix = sklearn.metrics.confusion_matrix(y_true, y_pred)
 			return df_metrics
 		else:
 			return y_pred
